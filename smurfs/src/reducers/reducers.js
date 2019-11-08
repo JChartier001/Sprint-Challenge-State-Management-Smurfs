@@ -1,4 +1,5 @@
 import {FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE} from "../actions/APIactions"
+import { POST_NEW_SMURF } from "../actions/POSTactions";
 
 
 export const initialState = {
@@ -27,6 +28,11 @@ export function reducers(state=initialState, action) {
                 isLoading: false,
                 error: action.payload
             };
+        case POST_NEW_SMURF:
+            return{
+                ...state,
+                smurfs: action.payload
+            }
         default:
             return state
     }
