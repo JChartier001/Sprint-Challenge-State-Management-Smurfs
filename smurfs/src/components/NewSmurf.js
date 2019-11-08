@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import { postNewSmurf } from "../actions/POSTactions";
 
 
-export const NewSmurf=() =>{
+export const NewSmurf=(props) =>{
     const [newSmurf, setNewSmurf] = useState({
         name: "",
         age: null,
@@ -13,34 +13,33 @@ export const NewSmurf=() =>{
 
 
 const handleInputChange = e =>{
-    setNewSmurf({[e.target.name]: e.target.value})
+    setNewSmurf({...newSmurf,
+        [e.target.name]: e.target.value})
     
 }
 
 const handleSubmit = e =>{
     e.preventDefault();
-    postNewSmurf();
+    console.log(newSmurf)
+    postNewSmurf(newSmurf);
+    
 }
 return (
     
     <div>
-        <form onClick={() => handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <h2>Add a new Smurf Member</h2>
-            <label htmlFor="newSmurfName" >Smurf Name: </label>
-            <input type="text" name="newSmurfName" placeholder="Enter Smurf Name" onChange={handleInputChange}/>
-            <label htmlFor="newSmurfAge">Smurf Age: </label>
-            <input type="text" name="newSmurfAge" placeholder="Enter Smurf Age" onChange={handleInputChange}/>
-            <label htmlFor="newSmurfHeight">Smurf Height: </label>
-            <input type="text" name="newSmurfHeight" placeholder="Enter Smurf Height" onChange={handleInputChange}/>
-            <button>Submit</button>
+            <label htmlFor="name" >Smurf Name: </label>
+            <input type="text" name="name" placeholder="Enter Smurf Name" onChange={handleInputChange}/>
+            <label htmlFor="age">Smurf Age: </label>
+            <input type="text" name="age" placeholder="Enter Smurf Age" onChange={handleInputChange}/>
+            <label htmlFor="height">Smurf Height: </label>
+            <input type="text" name="height" placeholder="Enter Smurf Height" onChange={handleInputChange}/>
+            <button type="submit">Submit</button>
         </form>
     </div>
 )
 }
-
-
-   
-
 function mapStateToProps(state) {
     return {
         smurfs: state.smurfs

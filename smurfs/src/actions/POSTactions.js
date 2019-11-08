@@ -1,30 +1,37 @@
 import axios from "axios";
-import {FETCH_SMURFS_START, fetchSmurfs} from "./APIactions"
-import { NewSmurf } from "../components/NewSmurf";
+
 
 
 export const POST_NEW_SMURF = "POST_NEW_SMURF"
 export const POST_SMURF_SUCCESS = "POST_SMURF_SUCCESS"
 export const POST_SMURF_FAILURE = "POST_SMURF_FAILURE"
+export const POST_SMURF_START = "POST_SMURF_START"
 
-
+const addsmurfSuccess = smurf => ({
+    type: POST_SMURF_SUCCESS,
+    payload: {
+      ...smurf
+    }
+  });
 
 
 export function postNewSmurf({ name, age, height}) {
+    // console.log("Hello")
     return dispatch =>{
-        dispatch({type: FETCH_SMURFS_START});
+        console.log("Hello")
+        // dispatch({type: POST_SMURF_START});
         axios
         .post("http://localhost:3333/smurfs", {
-            name: NewSmurf.name,
-            age: NewSmurf.age,
-            heigh: NewSmurf.height
+            name: name,
+            age: age,
+            height: height
         } )
         .then(response => {
-            setTimeout(() => {
-                dispatch({type: POST_SMURF_SUCCESS, payload: response.data})
-            })          
+            console.log("we are inside")        
+                dispatch(addsmurfSuccess(response.data))
+                 
         
-        .catch(error => {
+        .catch(error => { console.log(error)
             dispatch({type: POST_SMURF_FAILURE, payload: error})
         });
     })
