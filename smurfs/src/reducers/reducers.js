@@ -1,12 +1,12 @@
 import {FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE} from "../actions/APIactions"
-import { POST_SMURF_START, POST_SMURF_SUCCESS, POST_SMURF_FAILURE } from "../actions/POSTactions";
+import { POST_SMURF_START, POST_SMURF_SUCCESS, POST_SMURF_FAILURE } from "../actions/APIactions";
+import {DELETING_SMURFS_FAILURE, DELETING_SMURFS_SUCCESS, EDITING_SMURFS_SUCCESS, EDITING_SMURFS_FAILURE} from "../actions/APIactions"
 
 
 export const initialState = {
     smurfs: [],
     isLoading: false,
     error: null
-
 }
 
 export function reducers(state=initialState, action) {
@@ -47,21 +47,29 @@ export function reducers(state=initialState, action) {
                     ...state,
                     error: action.payload,
                     isLoading: false
-                };
-            case DELETING_SMURFS:
-                return {
-                    ...state,deletingSmurf:true,
-                }
+                };            
             case DELETING_SMURFS_SUCCESS:
                 return {
-                    ...state,smurfs:action.payload,deletingSmurf:false
+                    ...state,
+                    smurfs:action.payload
                 }
             case DELETING_SMURFS_FAILURE:
                 return {
-                    ...state,deletingSmurf:false
+                    ...state,
+                    error: action.payload
                 }
-        default:
-            return state
+            case EDITING_SMURFS_SUCCESS:
+                return {
+                    ...state,
+                    smurfs:action.payload
+                }
+            case EDITING_SMURFS_FAILURE:
+                return {
+                    ...state,
+                    error: action.payload
+                }
+            default:
+                return state
     }
 }
 
