@@ -1,5 +1,5 @@
 import {FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE} from "../actions/APIactions"
-import { bindActionCreators } from "../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/redux";
+
 
 export const initialState = {
     smurfs: null,
@@ -25,7 +25,7 @@ export function reducers(state=initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                error: true
+                error: action.payload
             };
         default:
             return state

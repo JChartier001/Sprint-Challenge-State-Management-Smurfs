@@ -1,17 +1,46 @@
-import React, { Component, useEffect } from "react";
-import {connect} from "redux"
+import React, { useEffect } from "react";
+import {connect} from "react-redux";
+import SmurfCard from "../components/SmurfCard"
+import {fetchSmurfs} from "../actions/APIactions";
+import NewSmurf from "../components/NewSmurf"
 import "./App.css";
-class App extends Component {
-  render() {
+
+
+
+function App (props) {
+  useEffect(() =>{
+    props.fetchSmurfs();
+  }, [])
     return (
       <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
+        <h1>SMURFS!</h1>
+        {props.error && <p>Error" {props.error}</p>}
+
+        {props.isLoading ? 
+        (
+          <div>...Loading</div>
+        ) : (
+          <div>
+          <SmurfCard />
+          <NewSmurf/>
+          </div>
+        )}
       </div>
-    );
+    )
+  }
+  
+function mapStateToProps(state){
+  console.log("App", state)
+  return{
+    isLoading: state.isLoading,
+    error: state.error,
+    smurfs: state.smurfs
+
   }
 }
 
-export default App;
+const mapDispathToProps = {
+  fetchSmurfs
+}
+
+export default connect(mapStateToProps, mapDispathToProps)(App);
