@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import SmurfCard from "../components/SmurfCard"
 import {fetchSmurfs} from "../actions/APIactions";
 import NewSmurf from "../components/NewSmurf"
+
 import "./App.css";
 
 
@@ -37,8 +38,8 @@ function mapStateToProps(state){
   }
 }
 
-const mapDispathToProps = {
+const mapDispatchToProps = {
   fetchSmurfs
 }
 
-export default connect(mapStateToProps, mapDispathToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

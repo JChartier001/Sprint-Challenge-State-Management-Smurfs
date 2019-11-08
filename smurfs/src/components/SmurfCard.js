@@ -13,6 +13,8 @@ function SmurfCard(props){
             </div>
     )}) : null
 } 
+<button className="edit">Edit Smurf</button>
+<button className="delete">Delete Smurf</button>
 </div>
     );
 }
@@ -25,7 +27,7 @@ console.log("TCL: mapStateToProps -> state", state)
         smurfs: state.smurfs
     }
 }
-   
+
 
 
 export default connect(mapStateToProps)(SmurfCard);
