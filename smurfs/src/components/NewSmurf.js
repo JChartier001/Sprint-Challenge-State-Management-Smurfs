@@ -21,11 +21,10 @@ const handleInputChange = e =>{
 const handleSubmit = e =>{
     e.preventDefault();
     console.log(newSmurf)
-    postNewSmurf(newSmurf);
-    
+    props.postNewSmurf(newSmurf);    
 }
-return (
-    
+
+return (    
     <div>
         <form onSubmit={handleSubmit}>
             <h2>Add a new Smurf Member</h2>
@@ -45,5 +44,9 @@ function mapStateToProps(state) {
         smurfs: state.smurfs
     }
 }
+const mapDispatchtoState = {
+    postNewSmurf
+}
 
-export default connect(mapStateToProps)(NewSmurf);
+
+export default connect(mapStateToProps, mapDispatchtoState)(NewSmurf);

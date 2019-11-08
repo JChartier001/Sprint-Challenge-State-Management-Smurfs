@@ -3,7 +3,7 @@ import { POST_SMURF_START, POST_SMURF_SUCCESS, POST_SMURF_FAILURE } from "../act
 
 
 export const initialState = {
-    smurfs: null,
+    smurfs: [],
     isLoading: false,
     error: null
 
@@ -27,26 +27,38 @@ export function reducers(state=initialState, action) {
                 ...state,
                 isLoading: false,
                 error: action.payload
-            };        
+            };
         case POST_SMURF_SUCCESS:
                 console.log("Post success")
             return {
                 ...state,
                 isLoading: false,
                 smurfs: [...state.smurfs, action.payload]            
-            }
+            };
         case POST_SMURF_START:
             console.log("Post start")
             return{
                 ...state,
                 isLoading: true
-            }
+            };
             case POST_SMURF_FAILURE:
                 console.log("Post failure")
                 return{
                     ...state,
                     error: action.payload,
                     isLoading: false
+                };
+            case DELETING_SMURFS:
+                return {
+                    ...state,deletingSmurf:true,
+                }
+            case DELETING_SMURFS_SUCCESS:
+                return {
+                    ...state,smurfs:action.payload,deletingSmurf:false
+                }
+            case DELETING_SMURFS_FAILURE:
+                return {
+                    ...state,deletingSmurf:false
                 }
         default:
             return state

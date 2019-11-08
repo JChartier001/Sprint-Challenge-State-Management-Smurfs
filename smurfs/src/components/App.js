@@ -14,8 +14,7 @@ function App (props) {
     return (
       <div className="App">
         <h1>SMURFS!</h1>
-        {props.error && <p>Error" {props.error}</p>}
-
+        {props.error && <p>Error: {props.error}</p>}
         {props.isLoading ? 
         (
           <div>...Loading</div>
@@ -35,7 +34,6 @@ function mapStateToProps(state){
     isLoading: state.isLoading,
     error: state.error,
     smurfs: state.smurfs
-
   }
 }
 
