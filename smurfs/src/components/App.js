@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
+import {connect} from "redux"
 import "./App.css";
 class App extends Component {
   render() {
